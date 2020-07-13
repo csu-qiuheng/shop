@@ -1,0 +1,23 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD com.example.Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boss.shop.mapper.GoodMapper">
+
+    <insert id="addGoodToMall" parameterType="com.boss.shop.entity.Good" >
+        INSERT INTO shop.goods(goodId,goodName,goodPrice,goodTotalNum)
+        VALUES (#{goodId},#{goodName},#{goodPrice},#{goodTotalNum})
+    </insert>
+
+    <select id="findGoodByGoodId" resultType="com.boss.shop.entity.Good">
+        SELECT * FROM shop.goods where goodId=#{goodId}
+    </select>
+
+    <select id="listGood" resultType="com.boss.shop.entity.Good">
+        SELECT * FROM shop.goods
+    </select>
+
+    <update id="updateGoodTotalNum">
+    update goods set goods.goodTotalNum=#{goodTotalNum} where goods.goodId=#{goodId}
+    </update>
+</mapper>

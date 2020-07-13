@@ -1,0 +1,29 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD com.example.Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boss.shop.mapper.CartMapper">
+
+    <resultMap id="result" type="com.boss.shop.entity.Cart">
+        <result property="userId" column="userId"/>
+        <result property="goodId" column="goodId"/>
+        <result property="goodNum" column="goodNum"/>
+    </resultMap>
+
+    <insert id="addGood" parameterType="com.boss.shop.entity.Cart" >
+        INSERT INTO shop.cart(userId,goodId,goodNum)
+        VALUES (#{userId},#{goodId},#{goodNum})
+    </insert>
+
+    <select id="listCart" resultMap="result">
+        SELECT * FROM shop.cart
+    </select>
+
+    <update id="updateCartByUserIdAndGoodId">
+        update cart set cart.goodNum=#{goodNum} where cart.userId=#{userId} and cart.goodId=#{goodId}
+    </update>
+
+    <select id="listCartByUserId" resultMap="result">
+        SELECT userId, goodId, goodNum FROM shop.cart where shop.cart.userId=#{userId}
+    </select>
+</mapper>
