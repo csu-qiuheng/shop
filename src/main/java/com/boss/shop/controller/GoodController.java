@@ -46,4 +46,14 @@ public class GoodController {
     List<Good> listGood(){
         return goodService.listGood();
     }
+
+    @RequestMapping(value = "deleteGoodByGoodId")
+    String deleteGoodByGoodId(int goodId){
+        int i = goodService.deleteGoodByGoodId(goodId);
+        if (i == -1){
+            return "通过商品ID删除商品失败！";
+        }else {
+            return "通过商品ID删除商品成功！";
+        }
+    }
 }

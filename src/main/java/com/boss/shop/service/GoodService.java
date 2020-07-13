@@ -13,4 +13,6 @@ public interface GoodService {
     int updateGoodTotalNum(int goodId, int goodTotalNum);
 
     List<Good> listGood();
+
+    int deleteGoodByGoodId(int goodId);
 }

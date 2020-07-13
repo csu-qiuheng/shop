@@ -32,4 +32,9 @@ public class GoodServiceImp implements GoodService {
     public List<Good> listGood() {
         return goodMapper.listGood();
     }
+
+    @Override
+    public int deleteGoodByGoodId(int goodId) {
+        return goodMapper.deleteGoodByGoodId(goodId);
+    }
 }

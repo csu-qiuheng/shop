@@ -17,6 +17,10 @@
         SELECT * FROM shop.goods
     </select>
 
+    <delete id="deleteGoodByGoodId">
+        delete FROM shop.goods where goodId = #{goodId}
+    </delete>
+
     <update id="updateGoodTotalNum">
     update goods set goods.goodTotalNum=#{goodTotalNum} where goods.goodId=#{goodId}
     </update>

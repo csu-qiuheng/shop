@@ -20,4 +20,7 @@ public interface GoodMapper {
 
     //展示商品
     List<Good> listGood();
+
+    //通过商品ID删除商品
+    int deleteGoodByGoodId(int goodId);
 }
