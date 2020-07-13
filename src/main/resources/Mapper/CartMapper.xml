@@ -10,7 +10,7 @@
         <result property="goodNum" column="goodNum"/>
     </resultMap>
 
-    <insert id="addGood" parameterType="com.boss.shop.entity.Cart" >
+    <insert id="addGood">
         INSERT INTO shop.cart(userId,goodId,goodNum)
         VALUES (#{userId},#{goodId},#{goodNum})
     </insert>

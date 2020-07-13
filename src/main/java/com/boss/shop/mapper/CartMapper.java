@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface CartMapper {
     //添加商品到购物车
-    int addGood(Cart cart);
+    int addGood(int userId, int goodId, int goodNum);
 
     //展示购物车
     List<Cart> listCart();

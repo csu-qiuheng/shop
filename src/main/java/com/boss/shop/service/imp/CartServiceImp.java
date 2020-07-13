@@ -22,16 +22,17 @@ public class CartServiceImp implements CartService {
     GoodMapper goodMapper;
     @Override
     public String addGood(int userId, int goodId, int goodNum) {
-        Cart cart = new Cart();
-        cart.setUserId(userId);
-        cart.setGoodId(goodId);
-        cart.setGoodNum(goodNum);
+        //得到当前商品库存数量
 
-        int i = cartMapper.addGood(cart);
-        if(i == -1){
-            return "添加商品失败！";
-        }else{
-            return " 添加商品成功";
+        if((goodMapper.findGoodByGoodId(goodId) != null) && (goodNum > 0) && (goodNum < goodMapper.findGoodByGoodId(goodId).getGoodTotalNum())){
+            int now = goodMapper.findGoodByGoodId(goodId).getGoodTotalNum();
+            cartMapper.addGood(userId,goodId,goodNum);
+            goodMapper.updateGoodTotalNum(goodId,now - goodNum);
+            int remain = goodMapper.findGoodByGoodId(goodId).getGoodTotalNum();
+            return "增加商品到购物车成功！该类商品剩余数量为：" + remain;
+        }
+        else{
+            return "增加商品到购物车失败！原因：该类商品数量不足，或者超出该类商品购买数量，还或者根本不存在该类商品！";
         }
     }
 
@@ -55,9 +56,9 @@ public class CartServiceImp implements CartService {
             //查询剩余商品数量
             int remain = goodMapper.findGoodByGoodId(goodId).getGoodTotalNum();
 
-            return "通过用户ID和商品ID修改购物车中商品数量成功！该商品剩余数量为：" + remain;
+            return "通过用户ID和商品ID修改购物车中商品数量成功！该类商品剩余数量为：" + remain;
         }else{
-            return "通过用户ID和商品ID修改购物车中商品数量失败！原因：该商品数量不足！";
+            return "通过用户ID和商品ID修改购物车中商品数量失败！原因：该类商品数量不足！";
         }
     }
 
